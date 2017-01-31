@@ -6,11 +6,9 @@ def russian_roulette()
   gun[rand(0...6)] = 1
 
   gun_array = *(1..6)
-  # print gun_array
 
   puts "pick a number 1 to 6"
   player_choose = gets.chomp.to_i
-  # print player_choose
 
   index_chosen = gun_array.index(player_choose)
   bullet_in = gun.find_index(1)
