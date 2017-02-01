@@ -14,21 +14,24 @@ puts "Your grid is:"
 contents.each {|each_row| puts each_row.join(',')}
 
 is_good = true
+super_array = contents, contents.transpose
 
-contents.each_with_index do |row_check, idx_row|
-  col_values = contents[0][idx_row] + contents[1][idx_row] + contents[2][idx_row]
-
-  if row_check.reduce(:+) != 15
-    is_good = false
-    puts "Row #{idx_row + 1}'s values: #{row_check} do not add up to 15"
-  else
+super_array.each_with_index do |sub_array, super_idx|
+  sub_array.each_with_index do |row_check, idx_row|
+    if row_check.reduce(:+) != 15
+      is_good = false
+      if super_idx == 0
+        puts "Row #{row_check} do not add up to 15"
+      else
+        puts "Col #{row_check} do not add up to 15"
+      end
+    end
   end
+end
 
-  if col_values != 15
-    is_good = false
-    puts "Column #{idx_row + 1}'s values #{contents[0][idx_row]}, #{contents[1][idx_row]}, #{contents[2][idx_row]} do not add up to 15"
-  else
-  end
+if contents.uniq.length == contents.length
+  is_good = false
+  puts "There are duplicate elements in grid."
 end
 
 puts "The grid seems good" if is_good
